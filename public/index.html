@@ -1,1 +1,107 @@
-<h1> xlist </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="no-cache, must-revalidate" http-equiv="Cache-Control">
+    <meta content="0" http-equiv="expires">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="-1" http-equiv="Expires">
+
+    <script src="third_party_js/jquery-1.10.2.min.js"></script>
+    <script src="third_party_js/lodash.min.js"></script>
+    <script src="third_party_js/taffy-min.js"></script>
+    <script src="third_party_js/doT.min.js"></script>
+
+    <script src="js/xtool.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/width_adapter.js"></script>
+
+    <title>xlist</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link id="favicon" href="favicon_blue.ico" rel="icon" type="image/x-icon" />
+</head>
+<body>
+
+
+    <div id="head">
+    </div>
+
+    <div id="div_manage">
+        <div id="new_task">
+            <input class="new_task_input"/>
+            <div class="new_task_more_info" style="display:none"> 
+                #more info 
+            </div>
+        </div>
+    </div>
+
+    <div id="div_tasks">
+    </div>
+
+
+    <div style="display:none">
+        <script id="tasks-tmpl" type="text/x-dot-template">
+            <ul>
+                {{~it.tasks:val:index}}
+                <li class="{{= val.new?"new":""}}">
+                    <div style="width:40px">
+                        <b>
+                        {{= val.score}}
+                        </b>
+                    </div>
+                    <div class="task_name" style="width:240px;min-width:240px;">
+                        <input name="name" value="{{= val.name }}" >
+                        <span>{{= val.name?val.name:"&nbsp;" }}</span>
+                    </div>
+                    <div style="width:40px">
+                        <input name="name" value="{{= val.load}}" >
+                        <span>{{= val.load}}mh</span>
+                    </div>
+                    <div style="width:40px">
+                        <input name="name" value="{{= val.remain_day}}" >
+                        <span>{{= val.remain_day}}天</span>
+                    </div>
+                    <div style="width:40px">
+                        <input name="name" value="{{= val.priority}}" >
+                        <span>Pr{{= val.priority}}</span>
+                    </div>
+                    <div style="width:160px;font-size:12px" value="{{= val.deadline}}">
+                        {{= new Date(val.deadline).format("yyyy-MM-dd hh:mm")}}
+                    </div>
+                </li>
+                {{~}}
+            </ul>
+        </script>
+        <script id="tasks-tmpl-bak" type="text/x-dot-template">
+            <ul>
+                {{~it.tasks:val:index}}
+                <li>
+                {{= val.id }} 
+                <input value="{{= val.name }}" name="name[{{=val.id}}]" /> 
+                <input value="{{= val.priority}}" name="priority[{{=val.id}}]" /> 
+                </li>
+                {{~}}
+            </ul>
+        </script>
+    </div>
+
+</body>
+
+
+
+<script>
+    $(function(){
+        xtool.init({});
+        app.init({},function(){
+        });
+    })
+
+</script>
+
+</html>
+
