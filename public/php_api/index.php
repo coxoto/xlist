@@ -5,7 +5,11 @@
     $m = $_GET["m"];
     $filename=dirname(__FILE__)."\db.txt";
     if($m == "get"){
-        echo file_get_contents($filename);
+        if(file_exists($filename)){
+            echo file_get_contents($filename);
+        }else{
+            echo "{}";
+        }
     }else if($m == "post"){
         file_put_contents($filename,$input);
         echo "{\"res\":0}";

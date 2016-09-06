@@ -3,20 +3,26 @@ var app = function(){
 
     var db_tasks;
     var db_done_tasks;
-
+    
+    //从数据库以json形式读出数据
     var ajax_read_db =  function(callback){
         $.ajax({
             type: "get",
             url:"php_api/index.php?m=get",
-            //data: "m=get",
             success:function(res){
-                callback(JSON.parse(res));
+                var json = JSON.parse(res);
+                if(json){
+                    callback(json);
+                }else{
+                    alert("db error!");
+                }
             }
         })
         //{"tasks":[{"id":1,"name":"开发MC demo版本","load":8,"priority":0,"deadline":1472616000000},{"id":2,"name":"开发xxoo","load":1,"priority":0,"deadline":1475294400000},{"id":3,"name":"黄涛项目准备","load":1,"priority":2,"deadline":1472529600000}],"done_tasks":[]}
         //console.log(str);
     }
 
+    //以json形式存入数据库
     var ajax_save_db =  function(){
         data = JSON.stringify({tasks:db_tasks().get()});
         //data = '{"tasks":[{"id":1,"name":"开发MC demo版本","load":8,"priority":0,"deadline":1472616000000},{"id":2,"name":"开发xxoo","load":1,"priority":0,"deadline":1475294400000},{"id":3,"name":"黄涛项目准备","load":1,"priority":2,"deadline":1472529600000}],"done_tasks":[]}';
@@ -83,16 +89,17 @@ var app = function(){
     // ------- bind --------
 
     var bindings = function(){ 
-        var new_task_input     = $("#new_task input.new_task_input");     
-        var new_task_more_info = $("#new_task div.new_task_more_info");     
+        var new_task_input     = $("#js_new_task_input");     
+        //var new_task_more_info = $("#js_new_task_more_info");     
         new_task_input.on("focus",function(){
             //new_task_more_info.slideDown(200);
         });
         new_task_input.bind("focusout",function(){
-            new_task_more_info.slideUp(200);
+            //new_task_more_info.slideUp(200);
         });
 
         document.onkeydown = function(){
+            //esc 按下的时候处理 
             if(event.keyCode==27){
                 //console.log("esc");
                 new_task_input.blur();
@@ -100,11 +107,12 @@ var app = function(){
         };
 
         new_task_input.bind("keypress",function(){
+            //在new task input按下回车时的处理
             if(event.keyCode==13){
                 var content = new_task_input.val();
                 if(content){
                     var name = content;
-                    db_tasks.insert({"id":4,"name":name,"load":1,"priority":0,"deadline":1472616000000,"new":1});
+                    db_tasks.insert({"id":_.now(),"name":name,"load":1,"priority":0,"deadline":_.now()+3600*1000*8,"new":1});
                     db_make_score();
                     render();
                     ajax_save_db();
@@ -130,7 +138,7 @@ var app = function(){
         })
 
         $("#div_tasks").bind("focusout","div",function(){
-            $(this).find("input").hide();
+            $(this).find("input[type!='checkbox']").hide();
             $(this).find("span").show();
         })
 

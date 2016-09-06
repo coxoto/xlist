@@ -28,33 +28,34 @@
 <body>
 
 
-    <div id="head">
-    </div>
+    <div class="all">
+        <div class="manage">
+            <input class="new_task" id="js_new_task_input"/>
+            <!--<div class="new_task_more_info" style="display:none"> -->
+                <!-- more info -->
+            <!--</div>-->
+        </div>
 
-    <div id="div_manage">
-        <div id="new_task">
-            <input class="new_task_input"/>
-            <div class="new_task_more_info" style="display:none"> 
-                #more info 
-            </div>
+        <div id="div_tasks">
         </div>
     </div>
 
-    <div id="div_tasks">
-    </div>
 
-
+    <!--task tmpl-->
     <div style="display:none">
         <script id="tasks-tmpl" type="text/x-dot-template">
             <ul>
                 {{~it.tasks:val:index}}
                 <li class="{{= val.new?"new":""}}">
-                    <div style="width:40px">
+                    <div style="width:25px">
+                        <input name="a" type="checkbox" />
+                    </div>
+                    <div style="width:30px">
                         <b>
                         {{= val.score}}
                         </b>
                     </div>
-                    <div class="task_name" style="width:240px;min-width:240px;">
+                    <div class="task_name" style="">
                         <input name="name" value="{{= val.name }}" >
                         <span>{{= val.name?val.name:"&nbsp;" }}</span>
                     </div>
@@ -70,13 +71,15 @@
                         <input name="name" value="{{= val.priority}}" >
                         <span>Pr{{= val.priority}}</span>
                     </div>
-                    <div style="width:160px;font-size:12px" value="{{= val.deadline}}">
+                    <div style="width:130px;" value="{{= val.deadline}}">
                         {{= new Date(val.deadline).format("yyyy-MM-dd hh:mm")}}
                     </div>
+                    <div style="clear:both"></div>
                 </li>
                 {{~}}
             </ul>
         </script>
+
         <script id="tasks-tmpl-bak" type="text/x-dot-template">
             <ul>
                 {{~it.tasks:val:index}}

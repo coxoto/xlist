@@ -1,6 +1,6 @@
 body { 
-    font-size: 16px; 
-    line-height:24px;
+    font-size: 14px; 
+    line-height:28px;
 }
 a,a:visited { text-decoration: none; }
 a:hover { text-decoration: underline; }
@@ -13,43 +13,39 @@ body,ul,li,input{
     list-style:none;
 }
 
-#div_manage{
+.all{
     width:640px;
-    padding:10px;
-    background-color:#eee;
+    margin:10px auto;
 }
 
-#div_manage #new_task  input.new_task_input{
-    width:618px;
+.manage{
+    width:100%;
+    /*padding:10px;*/
+    /*background-color:#eee;*/
+}
+
+.manage input.new_task{
+    width:100%;
     border:1px solid #333;
 }
 
-#div_manage #new_task  div.new_task_more_info{
-    margin-top:2px;
-    border:1px solid #333;
-    color:#999;
-    width:618px;
-}
 
 
 #div_tasks{
-    width:640px;
-    background-color:#eee;
+    width:100%;
     padding:1px 0;
     margin-top:5px;
 }
 #div_tasks > ul{
-_display: inline-block; overflow: hidden;
-    /*width:620px;*/
+    _display: inline-block; overflow: hidden;
 }
 
 #div_tasks > ul > li{
-    /*width:620px;*/
-    height:30px;
-    background-color:#ddd;
+    width:100%;
+    height:28px;
     zoom: 1; 
     border-top: 1px dotted #ccc; 
-    padding: 5px 0; 
+    /*padding: 1px 0; */
     margin-top: -1px; 
 }
 
@@ -59,12 +55,32 @@ _display: inline-block; overflow: hidden;
 
 #div_tasks > ul > li > div{
     float:left;
+    border-right:1px solid #eee;
+    /*border:2px solid #333;*/
+}
+#div_tasks > ul > li > div.task_name{
+    overflow:hidden;
+    width:260px;
+    min-width:260px;
+    height:28px;
 }
 #div_tasks > ul > li > div > input{
-    font-size:16px;
     display:none;
     width:100%;
     border:1px solid blue;
+}
+
+#div_tasks > ul > li > div > input[type=checkbox]{
+    display:inline;
+    position:relative;
+    left:4px;
+    top:4px;
+    width:16px;
+    height:16px;
+    /*top:8px;*/
+    /*display:none;*/
+    /*width:100%;*/
+    /*border:1px solid blue;*/
 }
 
 
